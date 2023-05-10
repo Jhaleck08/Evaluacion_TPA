@@ -1,0 +1,69 @@
+import sys
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QPixmap
+from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QTableWidget, QTableWidgetItem, QPushButton
+ 
+ #
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle("Sección práctica prueba individual")
+        self.setGeometry(100, 100, 518, 277)
+
+        main_widget = QWidget()
+        main_layout = QVBoxLayout()
+        main_widget.setLayout(main_layout)
+        self.setCentralWidget(main_widget)
+
+        username_label = QLabel("Nombre de Usuario")
+        username_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        main_layout.addWidget(username_label)
+
+        layout = QHBoxLayout()
+
+        left_layout = QVBoxLayout()
+
+        imagen = QLabel()
+        pixmap = QPixmap("C:/Users/franc/OneDrive/Imágenes/descargar (1).jpg") 
+        imagen.setScaledContents(True)
+        imagen.setPixmap(pixmap)
+        imagen.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        description_label = QLabel("Descripción de la imagen")
+
+        left_layout.addWidget(imagen)
+        left_layout.addWidget(description_label)
+
+        layout.addLayout(left_layout)
+
+        table = QTableWidget()
+        table.setColumnCount(2)
+        table.setRowCount(6)
+
+        attributes = ['Atributo 1', 'Atributo 2', 'Atributo 3', 'Atributo 4', 'Atributo 5', 'Atributo 6']
+        values = ['Valor 1', 'Valor 2', 'Valor 3', 'Valor 4', 'Valor 5', 'Valor 6']
+
+        for row, (attribute, value) in enumerate(zip(attributes, values)):
+            attribute_item = QTableWidgetItem(attribute)
+            value_item = QTableWidgetItem(value)
+
+            table.setItem(row, 0, attribute_item)
+            table.setItem(row, 1, value_item)
+
+        layout.addWidget(table)
+
+        main_layout.addLayout(layout)
+
+        button = QPushButton("OK")
+        button.setStyleSheet("QPushButton { background-color: #4878fa; color: white; }")
+        main_layout.addWidget(button)
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+
+    window = MainWindow()
+    window.show()
+
+    sys.exit(app.exec())
